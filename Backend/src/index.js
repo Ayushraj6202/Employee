@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended:true}));
 //call all routes
 
 
-const PORT = import.meta.env.PORT||4000;
+const PORT = process.env.PORT||4000;
 app.listen(PORT,()=>{
     console.log(`Server is Listining at ${PORT}`);
 })
