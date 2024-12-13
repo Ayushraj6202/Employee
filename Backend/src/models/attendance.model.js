@@ -4,7 +4,7 @@ import mongooseAggregatePaginate from "mongoose-aggregate-paginate-v2";
 const attendeceSchema = new mongoose.Schema(
     {
         employee: {
-            type: Schema.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: "Employee",
             required: true,
             index: true,
@@ -23,4 +23,4 @@ const attendeceSchema = new mongoose.Schema(
 
 attendeceSchema.plugin(mongooseAggregatePaginate);
 
-export const Attendence = mongoose.model("Attendence", attendeceSchema);
+export const Attendance = mongoose.model("Attendance", attendeceSchema);
