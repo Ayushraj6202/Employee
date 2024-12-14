@@ -7,7 +7,9 @@ import {
   refreshAccessToken,
   changeCurrentPassword,
   getCurrentAdmin,
-  updateAdminDetails
+  updateAdminDetails,
+  allAdmin,
+  deleteAdmin
 } 
 from '../controllers/admin.controller.js';
 import { verifyJWT } from '../middlewares/auth.middleware.js';
@@ -24,5 +26,7 @@ adminRouter.route ('/refresh-token').post(verifyJWT , refreshAccessToken )
 adminRouter.route ('/change-password').post(verifyJWT , changeCurrentPassword )
 adminRouter.route ('/get-admin').get(verifyJWT , getCurrentAdmin )
 adminRouter.route ('/update').post( verifyJWT , updateAdminDetails)
+adminRouter.route('/all').get(verifyJWT, allAdmin)
+adminRouter.route('/delete/:id').delete(verifyJWT,deleteAdmin)
 
 export default adminRouter;

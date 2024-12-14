@@ -11,7 +11,6 @@ const EmployeeDetails = () => {
   const { id } = useParams();
   const [Loading, setLoading] = useState(true);
 
-
   const [editPersonal, setEditPersonal] = useState(false);
   const [editJob, setEditJob] = useState(false);
   const [editOther, setEditOther] = useState(false);
@@ -44,7 +43,6 @@ const EmployeeDetails = () => {
   }, [id])
   // State for input fields
   const handleEditToggle = (section) => {
-
     setLoading(true)
     setEmp(formData)
     const upd = async () => {

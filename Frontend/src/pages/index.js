@@ -13,10 +13,12 @@ import DesignationPage from "./designationPage/DesignationLayout";
 import DesigList from "./designationPage/DesigList"
 import AddDesignation from "./designationPage/AddDesignation";
 import DesignationDetails from "./designationPage/ViewEdit";
-import SalaryDetails from "./employeePage/Salary"
+import SalaryDetails from "./employeePage/Salary";
+import RegisterAdmin from "./adminPage/Register";
+import AllAdmins from "./adminPage/AllAdmins";
 
 export { Layout, SignIn, 
     EmployeePage, EmpList, AddEmployee, EmployeeDetails ,AttendanceDetails, SalaryDetails,
     DepartmentPage, DeptList , AddDepartment , DepartmentDetails,
-    DesignationPage , DesigList , AddDesignation, DesignationDetails
+    DesignationPage , DesigList , AddDesignation, DesignationDetails,RegisterAdmin,AllAdmins
 }

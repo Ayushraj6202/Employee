@@ -43,13 +43,11 @@ const Header = () => {
     try {
       await logout()
       dispatch ( logout_dispatch())
-      navigate ('/')
+      navigate ('/home')
     } catch (error) {      
       console.error ( "error in logout ")
     }
-
   }
-
 
   useEffect(() => {
     const adminfinded = async () => {
@@ -60,9 +58,8 @@ const Header = () => {
         setLogin(false);
       }
     };
-
     adminfinded();
-  }, []);
+  }, [login]);
 
 
   return (
@@ -96,8 +93,6 @@ const Header = () => {
           })}
         </ul>
       </nav>
-
-
       {/* User/Login */}
       <div className="hidden md:flex items-center space-x-4">
         {!login ? (
@@ -122,6 +117,13 @@ const Header = () => {
                   onClick={ToggleTheme} >
                   Toggle Theme
                 </button>
+
+                <button className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100 dark:text-text-primary dark:hover:bg-background-tertiary"
+                onClick={()=>navigate('/admin/profile')}
+                >
+                  Profile
+                </button>
+
                 <button className="block w-full text-left px-4 py-2 text-black hover:bg-gray-100 dark:text-text-primary dark:hover:bg-background-tertiary"
                   onClick={()=>{logoutfun(); toggleUserMenu();}}
                 >
@@ -197,8 +199,6 @@ const Header = () => {
           </ul>
         </nav>
       )}
-
-
     </header>
   );
 };

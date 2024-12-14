@@ -13,7 +13,7 @@ const generateAccessAndRefereshTokens = async (adminId) => {
 
         return { accessToken, refreshToken };
     } catch (error) {
-        throw res.status(500).json({ message: "Something went wrong while generating referesh and access token" });
+        return res.status(500).json({ message: "Something went wrong while generating referesh and access token" });
         // throw new ApiError(500, "Something went wrong while generating referesh and access token")
     }
 }
@@ -25,7 +25,7 @@ const registerAdmin = async (req, res) => {
     if (
         [fullname, email, username, password].some((field) => field?.trim() === "")
     ) {
-        throw res.status(400).json({ message: "All fields are required" });
+        return res.status(400).json({ message: "All fields are required" });
         // throw new ApiError(400, "All fields are required")
     }
 
@@ -34,7 +34,7 @@ const registerAdmin = async (req, res) => {
     })
 
     if (existedAdmin) {
-        throw res.status(409).json({ message: "Admin with email or username already exists" });
+        return res.status(409).json({ message: "Admin with email or username already exists" });
         // throw new ApiError(409, "Admin with email or username already exists")
     }
 
@@ -51,7 +51,7 @@ const registerAdmin = async (req, res) => {
     )
 
     if (!createdAdmin) {
-        throw res.status(500).json({ message: "Something went wrong while registering the user" });
+        return res.status(500).json({ message: "Something went wrong while registering the user" });
         // throw new ApiError(500, "Something went wrong while registering the user")
     }
 
@@ -120,7 +120,6 @@ const loginAdmin = async (req, res) => {
         )
 
 }
-
 
 const logoutAdmin = async (req, res) => {
     await Admin.findByIdAndUpdate(
@@ -208,12 +207,12 @@ const refreshAccessToken = async (req, res) => {
 
 }
 
-
 const changeCurrentPassword = async (req, res) => {
     const { oldPassword, newPassword } = req.body
 
 
-
+    // console.log("backendd pass ",oldPassword,newPassword);
+    
     const admin = await Admin.findById(req.admin?._id)
     const isPasswordCorrect = await admin.isPasswordCorrect(oldPassword)
 
@@ -236,7 +235,6 @@ const changeCurrentPassword = async (req, res) => {
             // new ApiResponse(200, {}, "Password changed successfully")
         )
 }
-
 
 const getCurrentAdmin = async (req, res) => {
     console.log("get current admin ",req.admin);
@@ -264,19 +262,19 @@ const updateAdminDetails = async (req, res) => {
         return res.status(400).json({ message: "All fields are required" });
         // throw new ApiError(400, "All fields are required")
     }
-
     const admin = await Admin.findByIdAndUpdate(
         req.admin?._id,
         {
             $set: {
                 fullname,
-                email
+                email,
             }
         },
         { new: true }
 
     ).select("-password")
-
+    // console.log(admin);
+    
     return res
         .status(200)
         .json(
@@ -289,6 +287,30 @@ const updateAdminDetails = async (req, res) => {
         )
 };
 
+const allAdmin = async (req,res)=>{
+    try {
+        const all = await Admin.find();
+        console.log(all);
+        return res.status(200).json({
+            statusCode:200,
+            data:all,
+            message:"All Admin fetched successfully"
+        });
+    } catch (error) {
+        return res.status(500).json({message:"Internal Error"});
+    }
+}
+
+const deleteAdmin = async (req,res)=>{
+    const id = req.params.id;
+    console.log(id);
+    try {
+        await Admin.findByIdAndDelete(id);
+        return res.status(200).json({message:"Deleted"});
+    } catch (error) {
+        return res.status(500).json({message:"Internal Error"});
+    }
+}
 export {
     registerAdmin,
     loginAdmin,
@@ -297,4 +319,6 @@ export {
     changeCurrentPassword,
     getCurrentAdmin,
     updateAdminDetails,
+    allAdmin,
+    deleteAdmin
 }

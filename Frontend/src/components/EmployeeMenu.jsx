@@ -16,16 +16,16 @@ function OptionsMenu({ id }) {
         >
           Attendance
         </button>
-        <button className="w-full md:w-auto px-4 py-2 rounded-full bg-blue-600 text-white dark:bg-background-secondary hover:bg-blue-700"
+        {/* <button className="w-full md:w-auto px-4 py-2 rounded-full bg-blue-600 text-white dark:bg-background-secondary hover:bg-blue-700"
             onClick={e => navigate(`/Employees/feedback/${id}`) }
         >
             Feedback 
-        </button>
-        <button className="w-full md:w-auto px-4 py-2 rounded-full bg-green-600 text-white dark:bg-background-secondary hover:bg-blue-700"
+        </button> */}
+        {/* <button className="w-full md:w-auto px-4 py-2 rounded-full bg-green-600 text-white dark:bg-background-secondary hover:bg-blue-700"
           onClick={e => navigate(`/Employees/salary/${id}`)}
         >
           Salary
-        </button>
+        </button> */}
       </div>
     </div>
   );

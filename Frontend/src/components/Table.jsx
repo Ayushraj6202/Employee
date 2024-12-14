@@ -11,7 +11,8 @@ const Table = ({ path, listname }) => {
     const handleRowClick = (id) => {
         navigate(`${location.pathname}/details/${id}`);
     };
-
+    // console.log(data,path,listname,headers);
+    
     return (
         <div className="overflow-x-auto rounded-md">
             <table className="min-w-full border-collapse table-auto">
