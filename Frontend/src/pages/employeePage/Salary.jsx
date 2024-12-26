@@ -86,7 +86,7 @@ const SalaryDetails = () => {
                 )}
             </div>
 
-            <div className='p-4 bg-white dark:bg-background-secondary rounded-lg shadow'>
+            {/* <div className='p-4 bg-white dark:bg-background-secondary rounded-lg shadow'>
                 <h3 className='text-lg font-semibold dark:text-text-primary'>Calculate Payment</h3>
                 <div className='mt-4'>
                     <label className='block text-sm font-medium dark:text-text-secondary'>Date up to</label>
@@ -102,9 +102,9 @@ const SalaryDetails = () => {
                 >
                     Calculate
                 </button>
-            </div>
+            </div> */}
 
-            {payment && (
+            {/* {payment && (
                 <div className='p-4 mt-6 bg-white dark:bg-background-secondary rounded-lg shadow'>
                     <h3 className='text-lg font-semibold dark:text-text-primary'>Enter Transaction ID and Complete Payment</h3>
                     <div className="font-semibold dark:text-text-primary">{`Payment of ${payment} up to ${todate}`}</div>
@@ -124,7 +124,7 @@ const SalaryDetails = () => {
                         Complete Payment
                     </button>
                 </div>
-            )}
+            )} */}
         </div>
     );
 };

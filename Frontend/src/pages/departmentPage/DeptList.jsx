@@ -16,6 +16,7 @@ const EmpList = () => {
 
     const loading = useSelector((state) => state.department.loading);
     const queryParams = new URLSearchParams(location.search);
+    
     const patternOn = queryParams.get('PatternOn');
     const pattern = queryParams.get('Pattern');
     const page = queryParams.get('page') || 1;

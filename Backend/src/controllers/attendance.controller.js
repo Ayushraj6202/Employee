@@ -6,7 +6,6 @@ const markAttendance = async (req, res) => {
 
     if (!id || !date || !workday) {
         return res.status(400).json({message:"Employee ID,date and workday are required"});
-        // throw new ApiError(400, "Employee ID, date, and workday are required.");
     }
 
     const attendance = await Attendance.findOneAndUpdate(
@@ -17,7 +16,6 @@ const markAttendance = async (req, res) => {
 
     if (!attendance) {
         return res.status(500).json({message:"Error n marking attendence"});
-        // throw new ApiError(500, "Error in marking attendance");
     }
     return res.status(201).json(
         {
@@ -25,7 +23,6 @@ const markAttendance = async (req, res) => {
             data:attendance,
             message:"Attendence registered successfully"
         }
-        // new ApiResponse(200, attendance, "Attendance registered successfully")
     );
 
 };
@@ -50,7 +47,6 @@ const getAttendanceForMonth = async (req, res) => {
             data:attendanceRecords,
             message:"Attendence fetched successfully",
         }
-        // new ApiResponse(200, attendanceRecords, "Attendance fetched successfully")
     );
 };
 

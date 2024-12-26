@@ -24,7 +24,8 @@ const AttendanceCalendar = () => {
         load();
         setLoading(false);
     }, [selectedMonth, selectedYear]);
-
+    console.log(attendanceData);
+    
     const handleMonthChange = (event) => setSelectedMonth(event.target.value);
     const handleYearChange = (event) => setSelectedYear(event.target.value);
 

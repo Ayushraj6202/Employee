@@ -7,7 +7,6 @@ const registerEmployee = async (req, res) => {
         [firstname, gender, email, dob, joiningdate, payfrom].some((field) => field?.trim() === "")
     ) {
         return res.status(400).json({ message: "Fill the required feilds" });
-        // throw new ApiError(400, "Fill the required fields")
     }
 
     const existedEmployee = await Employee.findOne({
@@ -20,7 +19,6 @@ const registerEmployee = async (req, res) => {
 
     if (existedEmployee) {
         return res.status(409).json({ message: "Employee with email already exists" });
-        // throw new ApiError(409, "Employee with email already exists")
     }
 
 
@@ -43,7 +41,6 @@ const registerEmployee = async (req, res) => {
 
     if (!createdEmployee) {
         return res.status(500).json({ message: "Somethign went wrong while registering empolyee" });
-        // throw new ApiError(500, "Something went wrong while registering the employee")
     }
 
     return res.status(201).json(
@@ -52,7 +49,6 @@ const registerEmployee = async (req, res) => {
             data: createdEmployee,
             message: "Employee registered successfully"
         }
-        // new ApiResponse(200, createdEmployee, "Employee registered Successfully")
     )
 
 }
@@ -64,7 +60,6 @@ const updateEmployeeDetails = async (req, res) => {
         [id, firstname, gender, email, dob, joiningdate, payfrom].some((field) => field?.trim() === "")
     ) {
         return res.status(400).json({ message: "Fill the required feilds" });
-        // throw new ApiError(400, "Fill the required fields")
     }
 
     const employee = await Employee.findByIdAndUpdate(
@@ -97,7 +92,6 @@ const updateEmployeeDetails = async (req, res) => {
                 data: employee,
                 message: "Employee details updated successfully"
             }
-            // new ApiResponse(200, employee, "Employee details updated successfully")
         )
 };
 

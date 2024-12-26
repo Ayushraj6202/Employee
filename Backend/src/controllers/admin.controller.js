@@ -14,7 +14,6 @@ const generateAccessAndRefereshTokens = async (adminId) => {
         return { accessToken, refreshToken };
     } catch (error) {
         return res.status(500).json({ message: "Something went wrong while generating referesh and access token" });
-        // throw new ApiError(500, "Something went wrong while generating referesh and access token")
     }
 }
 
@@ -26,7 +25,6 @@ const registerAdmin = async (req, res) => {
         [fullname, email, username, password].some((field) => field?.trim() === "")
     ) {
         return res.status(400).json({ message: "All fields are required" });
-        // throw new ApiError(400, "All fields are required")
     }
 
     const existedAdmin = await Admin.findOne({
@@ -35,7 +33,6 @@ const registerAdmin = async (req, res) => {
 
     if (existedAdmin) {
         return res.status(409).json({ message: "Admin with email or username already exists" });
-        // throw new ApiError(409, "Admin with email or username already exists")
     }
 
 
@@ -52,7 +49,6 @@ const registerAdmin = async (req, res) => {
 
     if (!createdAdmin) {
         return res.status(500).json({ message: "Something went wrong while registering the user" });
-        // throw new ApiError(500, "Something went wrong while registering the user")
     }
 
     return res.status(201).json(
@@ -61,7 +57,6 @@ const registerAdmin = async (req, res) => {
             data: createdAdmin,
             message: "User registered successfully"
         }
-        // new ApiResponse(200, createdAdmin , "User registered Successfully")
     );
 }
 
@@ -70,7 +65,6 @@ const loginAdmin = async (req, res) => {
 
     if (!username && !email) {
         return res.status(400).json({ message: "username or email is required" });
-        // throw new ApiError(400, "username or email is required")
     }
 
     const admin = await Admin.findOne({
@@ -79,14 +73,12 @@ const loginAdmin = async (req, res) => {
 
     if (!admin) {
         return res.status(304).json({ message: "User does not exist" });
-        // throw new ApiError(304, "User does not exist")
     }
 
     const isPasswordValid = await admin.isPasswordCorrect(password)
 
     if (!isPasswordValid) {
         return res.status(306).json({ message: "Invalid user credentials" });
-        // throw new ApiError(306, "Invalid user credentials")
     }
 
     const { accessToken, refreshToken } = await generateAccessAndRefereshTokens(admin._id)
@@ -110,13 +102,6 @@ const loginAdmin = async (req, res) => {
                 },
                 message: "User logged in successfully"
             }
-            // new ApiResponse(
-            //     200,
-            //     {
-            //         user: loggedInUser, accessToken, refreshToken
-            //     },
-            //     "User logged In Successfully"
-            // )
         )
 
 }
@@ -155,7 +140,6 @@ const refreshAccessToken = async (req, res) => {
 
     if (!incomingRefreshToken) {
         return res.status(401).json({ message: "unauthorzed request" });
-        // throw new ApiError(401, "unauthorized request")
     }
 
     try {
@@ -168,13 +152,10 @@ const refreshAccessToken = async (req, res) => {
 
         if (!admin) {
             return res.status(401).json({ message: "Invalid refresh token" });
-            // throw new ApiError(401, "Invalid refresh token")
         }
 
         if (incomingRefreshToken !== admin?.refreshToken) {
             return res.status(401).json({ message: "Refresh token is expired or used" });
-            // throw new ApiError(401, "Refresh token is expired or used")
-
         }
 
         const options = {
@@ -194,15 +175,9 @@ const refreshAccessToken = async (req, res) => {
                     data: { accessToken, refreshToken: newRefreshToken },
                     message: "Access token refreshed"
                 }
-                // new ApiResponse(
-                //     200,
-                //     { accessToken, refreshToken: newRefreshToken },
-                //     "Access token refreshed"
-                // )
             )
     } catch (error) {
         return res.status(401).json({ message: error?.message || "Invalid refresh token" })
-        // throw new ApiError(401, error?.message || "Invalid refresh token")
     }
 
 }
@@ -218,7 +193,6 @@ const changeCurrentPassword = async (req, res) => {
 
     if (!isPasswordCorrect) {
         return res.status(400).json({ message: "Invalid old password" });
-        // throw new ApiError(400, "Invalid old password")
     }
 
     admin.password = newPassword
@@ -232,7 +206,6 @@ const changeCurrentPassword = async (req, res) => {
                 data: {},
                 message: "Password changed successfully"
             }
-            // new ApiResponse(200, {}, "Password changed successfully")
         )
 }
 
@@ -247,11 +220,6 @@ const getCurrentAdmin = async (req, res) => {
                 data: req.admin,
                 message: "User fetched succesfully"
             }
-            //     new ApiResponse(
-            //     200,
-            //     req.admin,
-            //     "User fetched successfully"
-            // )
         )
 }
 
@@ -260,7 +228,6 @@ const updateAdminDetails = async (req, res) => {
 
     if (!fullname || !email) {
         return res.status(400).json({ message: "All fields are required" });
-        // throw new ApiError(400, "All fields are required")
     }
     const admin = await Admin.findByIdAndUpdate(
         req.admin?._id,
@@ -283,14 +250,13 @@ const updateAdminDetails = async (req, res) => {
                 data: admin,
                 message: "Admin details updated successfully"
             }
-            // new ApiResponse(200, admin, "Admin details updated successfully")
         )
 };
 
 const allAdmin = async (req,res)=>{
     try {
         const all = await Admin.find();
-        console.log(all);
+        // console.log(all);
         return res.status(200).json({
             statusCode:200,
             data:all,
@@ -303,7 +269,7 @@ const allAdmin = async (req,res)=>{
 
 const deleteAdmin = async (req,res)=>{
     const id = req.params.id;
-    console.log(id);
+    // console.log(id);
     try {
         await Admin.findByIdAndDelete(id);
         return res.status(200).json({message:"Deleted"});

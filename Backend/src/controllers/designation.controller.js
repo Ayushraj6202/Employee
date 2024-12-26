@@ -11,7 +11,6 @@ const registerDesignation = async (req, res) => {
         [designationName].some((field) => field?.trim() === "")
     ) {
         return res.status(400).json({ message: "Fill the required feilds" });
-        // throw new ApiError(400, "Fill the required fields")
     }
     const existed = await Designation.findOne({
         designationName,
@@ -27,7 +26,6 @@ const registerDesignation = async (req, res) => {
     const created = await Designation.findById(designation._id)
     if (!created) {
         return res.status(500).json({ message: "Something went wrong while registering the designation" });
-        // throw new ApiError(500, "Something went wrong while registering the designation")
     }
     return res.status(201).json(
         {
@@ -35,7 +33,6 @@ const registerDesignation = async (req, res) => {
             data: created,
             message: "Designationn registred successfully"
         }
-        // new ApiResponse(200, created, "Designation registered Successfully")
     )
 };
 const upadateDesignation = async (req, res) => {
@@ -44,7 +41,6 @@ const upadateDesignation = async (req, res) => {
         [designationName, id].some((field) => field?.trim() === "")
     ) {
         return res.status(400).json({ message: "Fill the required fields" });
-        // throw new ApiError(400, "Fill the required fields")
     }
     const designation = await Designation.findByIdAndUpdate(
         id,
@@ -64,7 +60,6 @@ const upadateDesignation = async (req, res) => {
                 data: designation,
                 message: "Designation details updated successfuly"
             }
-            // new ApiResponse(200, designation, "Designation details updated successfully")
         )
 };
 const getDesignation = async (req, res) => {
@@ -96,7 +91,6 @@ const getDesignation = async (req, res) => {
                 data: result,
                 message: "Designation list fetched successfully"
             }
-            // new ApiResponse(200, result, "Designation List fetched successfully")
         )
 };
 const getDesignationDetails = async (req, res) => {
@@ -105,7 +99,6 @@ const getDesignationDetails = async (req, res) => {
     const designation = await Designation.findById(id);
     if (!designation) {
         return res.status(404).json({ message: `Designation not found with id ${id} ` });
-        // throw new ApiError(404, `Designation not found with id: ${id}`);
     }
     const employeeCount = await Employee.countDocuments({ designation: id });
     // Combine department details with employee count
@@ -119,7 +112,6 @@ const getDesignationDetails = async (req, res) => {
             data: designationDetails,
             message: "Designation details fetched succesffuly"
         }
-        // new ApiResponse(200, designationDetails, "Designation details fetched successfully")
     );
 };
 const deleteDesignation = async (req, res) => {
@@ -127,7 +119,6 @@ const deleteDesignation = async (req, res) => {
     const designation = await Designation.findById(id);
     if (!designation) {
         return res.status(404).json({ message: "Designation not found" });
-        // throw new ApiError(404, "Designation not found");
     }
     await Designation.findByIdAndDelete(id);
     return res.status(200).json(
@@ -135,7 +126,6 @@ const deleteDesignation = async (req, res) => {
             statusCode: 200,
             message: "Desiganation deleted successfuly"
         }
-        // new ApiResponse(200, null, "Designation deleted successfully")
     );
 };
 export {

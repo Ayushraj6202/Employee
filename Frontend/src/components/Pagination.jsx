@@ -3,8 +3,7 @@ import { pageno as page_reducer } from "../store/slices/employee_slice"
 
 const Pagination = ({path , listname }) => {
 
-    const totalPages = useSelector ( state =>  state[path][listname]?.totalPages || 1);
-    // const totalPages = 450 ; 
+    const totalPages = useSelector ( state =>  state[path][listname]?.totalPages || 1); 
     const currentPage = useSelector ( state => state[path].pageno )
     const dispatch = useDispatch()
 
